@@ -78,3 +78,8 @@ void loop() {
 }
 
 ```
+
+# Source
+
+Thanks to **Adafruit** for following great article:
+https://learn.adafruit.com/thermistor/using-a-thermistor
