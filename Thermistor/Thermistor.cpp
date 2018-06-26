@@ -42,10 +42,10 @@ Thermistor::Thermistor(int aDrainPin, int aNominalResistance, int aTemperatureNo
 }
 
 float Thermistor::readTemperature(int aAnalogPin) {
-  return readTemperatureAverage(aAnalogPin, DEFAULT_SAMPLES_COUNT);
+  return readTemperature(aAnalogPin, DEFAULT_SAMPLES_COUNT);
 }
 
-float Thermistor::readTemperatureAverage(int aAnalogPin, int numberOfSamples) {
+float Thermistor::readTemperature(int aAnalogPin, int numberOfSamples) {
   float average;
   int samples[numberOfSamples];
 

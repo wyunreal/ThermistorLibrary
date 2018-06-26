@@ -15,7 +15,7 @@ class Thermistor {
     Thermistor(int aDrainPin, int aNominalResistance, int aTemperatureNominal, int aBCoeficient, int aSeriesResistorValue);
 
     float readTemperature(int aAnalogPin);
-    float readTemperatureAverage(int aAnalogPin, int numberOfSamples);
+    float readTemperature(int aAnalogPin, int numberOfSamples);
 };
 
 #endif
