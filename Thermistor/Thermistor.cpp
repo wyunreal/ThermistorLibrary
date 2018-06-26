@@ -3,8 +3,7 @@
 
 #define DEFAULT_SAMPLES_COUNT 5
 
-Thermistor::Thermistor(int aAnalogPin) {
-  analogPin = aAnalogPin;
+Thermistor::Thermistor() {
   drainPin = 0;
   nominalResistance = 10000; // Resistance at 25 C
   temperatureNominal = 25; // temp. for nominal resistance (almost always 25 C)
@@ -12,8 +11,7 @@ Thermistor::Thermistor(int aAnalogPin) {
   seriesResistorValue = 10000; // Resistance of 'other' resistor
 }
 
-Thermistor::Thermistor(int aAnalogPin, int aDrainPin) {
-  analogPin = aAnalogPin;
+Thermistor::Thermistor(int aDrainPin) {
   drainPin = aDrainPin;
   nominalResistance = 10000; // Resistance at 25 C
   temperatureNominal = 25; // temp. for nominal resistance (almost always 25 C)
@@ -24,8 +22,7 @@ Thermistor::Thermistor(int aAnalogPin, int aDrainPin) {
   digitalWrite(drainPin, HIGH);
 }
 
-Thermistor::Thermistor(int aAnalogPin, int aNominalResistance, int aTemperatureNominal, int aBCoeficient, int aSeriesResistorValue) {
-  analogPin = aAnalogPin;
+Thermistor::Thermistor(int aNominalResistance, int aTemperatureNominal, int aBCoeficient, int aSeriesResistorValue) {
   drainPin = 0;
   nominalResistance = aNominalResistance;
   temperatureNominal = aTemperatureNominal;
@@ -33,8 +30,7 @@ Thermistor::Thermistor(int aAnalogPin, int aNominalResistance, int aTemperatureN
   seriesResistorValue = aSeriesResistorValue;
 }
 
-Thermistor::Thermistor(int aAnalogPin, int aDrainPin, int aNominalResistance, int aTemperatureNominal, int aBCoeficient, int aSeriesResistorValue) {
-  analogPin = aAnalogPin;
+Thermistor::Thermistor(int aDrainPin, int aNominalResistance, int aTemperatureNominal, int aBCoeficient, int aSeriesResistorValue) {
   drainPin = aDrainPin;
   nominalResistance = aNominalResistance;
   temperatureNominal = aTemperatureNominal;
@@ -45,11 +41,11 @@ Thermistor::Thermistor(int aAnalogPin, int aDrainPin, int aNominalResistance, in
   digitalWrite(drainPin, HIGH);
 }
 
-float Thermistor::readTemperature() {
-  return readTemperature(DEFAULT_SAMPLES_COUNT);
+float Thermistor::readTemperature(int aAnalogPin) {
+  return readTemperatureAverage(aAnalogPin, DEFAULT_SAMPLES_COUNT);
 }
 
-float Thermistor::readTemperature(int numberOfSamples) {
+float Thermistor::readTemperatureAverage(int aAnalogPin, int numberOfSamples) {
   float average;
   int samples[numberOfSamples];
 
@@ -59,7 +55,7 @@ float Thermistor::readTemperature(int numberOfSamples) {
     delay(100);
   }
   for (int i = 0; i < numberOfSamples; i++) {
-   samples[i] = analogRead(analogPin);
+   samples[i] = analogRead(aAnalogPin);
    delay(10);
   }
   if (drainPin > 0) {
